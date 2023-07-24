@@ -1,0 +1,12 @@
+﻿server:
+  port: 8080
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://zzhay-mysql.rwlb.rds.aliyuncs.com:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: zzhay
+    password: Zy@17623891105
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+    .login-container {
+        width: 386px;
+        height: 302px;
+        background-color: #fff;
+        padding: 63px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .login-container h2 {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button {
+        margin-top: 38px;
+        width: 410px;
+        padding: 15px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
+<body>
+
+<div class="login-container">
+    <h2>登录</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">用户名：</label>
+            <input type="text" id="name" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" onclick="login()">登录</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function login() {
+        var name = $('#name').val();
+        var password = $('#password').val();
+
+        // AJAX请求
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080//loginIn', // 后端API的URL，根据实际情况修改
+            data: {
+                name: name,
+                password: password
+            },
+            success: function(response) {
+                if (response.b) {
+                    // 登录成功
+                    $('#message').text("登录成功！");
+                    // 在这里可以进行登录成功后的相关操作，比如跳转到仪表盘页面
+
+                    window.location.href = "success.html"; // 跳转到仪表盘页面
+                } else {
+                    // 登录失败
+                    $('#message').text(response.msg);
+                    window.location.href = "error.html";
+                }
+            },
+            error: function(xhr, status, error) {
+                // 处理登录失败的情况
+                $('#message').text("登录失败，请检查用户名和密码。");
+            }
+        });
+    }
+</script>
+</body>
+</html>
