@@ -19,6 +19,7 @@ public class LoginController {
 
     @PostMapping(value = "/loginIn")
     public JsonResult login(String name, String password){
+        System.out.println("111");
         JsonResult result = userService.loginIn(name, password);
         return result;
     }
